@@ -19,7 +19,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Darumadrop+One&family=Raleway:ital,wght@0,100;0,300;1,200&family=Russo+One&display=swap"
         rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
 
 
 </head>
@@ -34,12 +36,13 @@
         style="background-color: black;">
 
         <div class="container">
-            <a class="navbar-brand" href="#"><strong class="text-primary" id="titles" >E.P</strong> <span
+            <a class="navbar-brand" href="#"><strong class="text-primary" id="titles">E.P</strong> <span
                     class="text-light" id="titles">Construcciones</span></a>
-            <button class="navbar-toggler" style="color: aliceblue;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" style="color: aliceblue;" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="bi bi-list"></span>
-                
+
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -73,9 +76,9 @@
     <header id="home" class="header">
         <div class="overlay"></div>
         <div class="header-content">
-            <p>Escobar, Peña y asociados</p>
-            <h6>Tu Hogar Ideal</h6>
-            <button class="btn btn-outline-light">Reunirse</button>
+            <p>Escobar-Peña </p>
+            <h6 style="font-size: 40px;">Materializando tus sueños</h6>
+            <button class="btn btn-outline-light" onclick="window.location.href='#contact'">Reunirse</button>
         </div>
     </header><!-- End of Page Header -->
 
@@ -321,28 +324,71 @@
     <section id="contact" class="text-center">
         <!-- container -->
         <div class="container">
-            <h1>CONTACT US</h1>
-            <p class="mb-5">If you have some Questions or need Help! Please Contact Us! <br>
-                We make Cool and Clean Design for your Business</p>
+            <h1>CONTACTANOS</h1>
+            <p class="mb-5">Si tenes preguntas o necesitas ayuda no dudes en contactarnos. <br>
+                Hacemos diseños atractivos y limpios para tu hogar o negocio</p>
 
             <!-- Contact form -->
-            <form class="contact-form col-md-11 col-lg-9 mx-auto">
+            <form id="contact-form" class="contact-form col-md-11 col-lg-9 mx-auto">
                 <div class="form-row">
                     <div class="col form-group">
-                        <input type="text" class="form-control" placeholder="Name">
+                        <input type="text" class="form-control" placeholder="Nombre" id="nombre">
                     </div>
                     <div class="col form-group">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" class="form-control" placeholder="Email" id="email">
                     </div>
                 </div>
                 <div class="form-group">
-                    <textarea name="" id="" cols="30" rows="5" class="form-control"
-                        placeholder="Your Message"></textarea>
+                    <input type="number" class="form-control" placeholder="Telefono" id="Telefono">
+                </div>
+            
+                <div class="form-group">
+                    <textarea id="mensaje" cols="30" rows="5" class="form-control" placeholder="Dejanos tus datos y tu consulta para contactarte"></textarea>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary btn-block" value="Send Message">
+                    <input type="submit" class="btn btn-primary btn-block" value="Enviar Mensaje">
                 </div>
-            </form><!-- End of Contact form -->
+            </form>
+            <script>
+                document.getElementById('contact-form').addEventListener('submit', function (event) {
+                    event.preventDefault(); // Evitar que el formulario se envíe por defecto
+
+                    // Obtenemos los valores del formulario
+                    var to_name = document.getElementById('nombre').value;
+                    var from_name = document.getElementById('email').value;
+                    var message = document.getElementById('mensaje').value;
+                    var telefono =document.getElementById('Telefono').value;
+
+                    // Enviamos el formulario mediante EmailJS
+                    emailjs.send("service_0lxel5o", "template_di6p5ua", {
+                        to_name: to_name,
+                        from_name: from_name,
+                        message: message,
+                        telefono: telefono
+                    })
+                        .then(function (response) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '¡Mensaje enviado!',
+                                text: 'El mensaje ha sido enviado correctamente.',
+                                confirmButtonText: 'Ok'
+                            });
+                            console.log('SUCCESS!', response.status, response.text);
+                        }, function (error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: '¡Error!',
+                                text: 'Ha habido un error al enviar el mensaje.',
+                                confirmButtonText: 'Ok'
+                            });
+                            console.log('FAILED...', error);
+                        });
+                });
+
+            </script>
+
+
+
         </div><!-- End of Container-->
     </section><!-- End of Contact Section -->
 
@@ -354,7 +400,7 @@
             <div class="pre-footer">
                 <ul class="list">
                     <li class="list-head">
-                        <h6 class="font-weight-bold">ABOUT US</h6>
+                        <h6 class="font-weight-bold">Acerca de nosotros</h6>
                     </li>
                     <li class="list-body">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae nobis fugit maxime deleniti
@@ -365,7 +411,7 @@
                 </ul>
                 <ul class="list">
                     <li class="list-head">
-                        <h6 class="font-weight-bold">USEFUL LINKS</h6>
+                        <h6 class="font-weight-bold">Links Utiles</h6>
                     </li>
                     <li class="list-body">
                         <div class="row">
@@ -386,10 +432,10 @@
                 </ul>
                 <ul class="list">
                     <li class="list-head">
-                        <h6 class="font-weight-bold">CONTACT INFO</h6>
+                        <h6 class="font-weight-bold">Informacion de Contacto</h6>
                     </li>
                     <li class="list-body">
-                        <p>Contact us and we'll get back to you within 24 hours.</p>
+                        <p>Contactanos y te responderemos dentro de 24hs.</p>
                         <p><i class="ti-location-pin"></i> 12345 Fake ST NoWhere AB Country</p>
                         <p><i class="ti-email"></i> info@website.com</p>
                         <div class="social-links">
@@ -408,13 +454,21 @@
             <footer class="footer">
                 <p>Copyright
                     <script>document.write(new Date().getFullYear())</script> &copy; <a
-                        href="http://www.devcrud.com">DevCRUD</a>
+                        href="http://www.devcrud.com">Todos los derechos reservados.</a>
                 </p>
             </footer><!-- End of Footer-->
 
         </div><!--End of Container -->
     </section><!-- End of Section -->
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+            (function () {
+                emailjs.init("XqGhTArd_dzUBXM4W");
+            })();
+    </script>
     <!-- core  -->
     <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
     <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
