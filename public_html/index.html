@@ -121,7 +121,8 @@
                                 hagan realidad. Nos enorgullece nuestra capacidad para entregar proyectos dentro del
                                 presupuesto y el cronograma establecidos, sin comprometer la calidad ni la seguridad.
                             </p>
-                            <p>En E.P Construcciones, nos comprometemos a seguir superando los estándares de excelencia en
+                            <p>En E.P Construcciones, nos comprometemos a seguir superando los estándares de excelencia
+                                en
                                 la industria de la construcción. Estamos listos para enfrentar nuevos desafíos y
                                 continuar brindando soluciones innovadoras y de alta calidad para nuestros clientes en
                                 todo momento.</p>
@@ -338,12 +339,18 @@
                         <input type="email" class="form-control" placeholder="Email" id="email">
                     </div>
                 </div>
-                <div class="form-group">
-                    <input type="number" class="form-control" placeholder="Telefono" id="Telefono">
+
+                <div class="form-row">
+                    <div class="col form-group">
+                        <input class="form-control" placeholder="Telefono fijo" id="Telefono">
+                    </div>
+                    <div class="col form-group">
+                        <input class="form-control" placeholder="Telefono movil" id="Telefono">
+                    </div>
                 </div>
-            
                 <div class="form-group">
-                    <textarea id="mensaje" cols="30" rows="5" class="form-control" placeholder="Dejanos tus datos y tu consulta para contactarte"></textarea>
+                    <textarea id="mensaje" cols="30" rows="5" class="form-control"
+                        placeholder="Dejanos tus datos y tu consulta para contactarte"></textarea>
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary btn-block" value="Enviar Mensaje">
@@ -357,7 +364,7 @@
                     var to_name = document.getElementById('nombre').value;
                     var from_name = document.getElementById('email').value;
                     var message = document.getElementById('mensaje').value;
-                    var telefono =document.getElementById('Telefono').value;
+                    var telefono = document.getElementById('Telefono').value;
 
                     // Enviamos el formulario mediante EmailJS
                     emailjs.send("service_0lxel5o", "template_di6p5ua", {
