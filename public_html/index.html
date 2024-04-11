@@ -63,14 +63,20 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#contact" style="color: aliceblue;">Contacto</a>
                     </li>
-                    <li class="nav-item ml-md-4">
-                        <a class="nav-link btn btn-primary text-light" href="components.html"
-                            style="display: none;">Components</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="components.html" ><img src="assets/imgs/wppicon.png" alt="IconWsp" width="90%" class="whatsappicono"></a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav><!-- End of Page Navbar -->
+    <style> 
+    @media (max-width: 576px) {
+    .whatsappicono {
+        width: 40px; /* Ajusta el tamaño según sea necesario */
+    }
+}
+    </style>
 
     <!-- Page Header -->
     <header id="home" class="header">
@@ -78,7 +84,7 @@
         <div class="header-content">
             <p>Escobar-Peña </p>
             <h6 style="font-size: 40px;">Materializando tus sueños</h6>
-            <button class="btn btn-outline-light" onclick="window.location.href='#contact'">Contáctanos</button>
+            <button class="btn btn-outline-light" onclick="window.location.href='#contact'" style="margin-top: 70px;">Contáctanos</button>
         </div>
     </header><!-- End of Page Header -->
 
@@ -328,6 +334,8 @@
             <h1>CONTACTANOS</h1>
             <p class="mb-5">Si tenes preguntas o necesitas ayuda no dudes en contactarnos. <br>
                 Hacemos diseños atractivos y limpios para tu hogar o negocio</p>
+            <h5 style="margin-bottom: 30px;">Porfavor ingrese todos sus datos correctamente y su consulta a continuacion
+            </h5>
 
             <!-- Contact form -->
             <form id="contact-form" class="contact-form col-md-11 col-lg-9 mx-auto">
@@ -342,7 +350,7 @@
 
                 <div class="form-row">
                     <div class="col form-group">
-                        <input class="form-control" placeholder="Telefono fijo" id="Telefono">
+                        <input class="form-control" placeholder="Telefono fijo" id="fijo">
                     </div>
                     <div class="col form-group">
                         <input class="form-control" placeholder="Telefono movil" id="Telefono">
@@ -358,20 +366,33 @@
             </form>
             <script>
                 document.getElementById('contact-form').addEventListener('submit', function (event) {
-                    event.preventDefault(); // Evitar que el formulario se envíe por defecto
+                    event.preventDefault(); // Evita que el formulario se envíe por defecto
 
                     // Obtenemos los valores del formulario
-                    var to_name = document.getElementById('nombre').value;
-                    var from_name = document.getElementById('email').value;
-                    var message = document.getElementById('mensaje').value;
-                    var telefono = document.getElementById('Telefono').value;
+                    var to_name = document.getElementById('nombre').value.trim();
+                    var from_name = document.getElementById('email').value.trim();
+                    var message = document.getElementById('mensaje').value.trim();
+                    var telefono = document.getElementById('Telefono').value.trim();
+                    var fijo = document.getElementById('fijo').value.trim();
+
+                    // Verificamos que todos los campos sean obligatorios
+                    if (!to_name || !from_name || !message || !telefono || !fijo) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Campos obligatorios',
+                            text: 'Por favor, complete todos los campos antes de enviar el formulario.',
+                            confirmButtonText: 'Ok'
+                        });
+                        return; // No continuamos si algún campo está vacío
+                    }
 
                     // Enviamos el formulario mediante EmailJS
                     emailjs.send("service_0lxel5o", "template_di6p5ua", {
                         to_name: to_name,
                         from_name: from_name,
                         message: message,
-                        telefono: telefono
+                        telefono: telefono,
+                        fijo: fijo
                     })
                         .then(function (response) {
                             Swal.fire({
@@ -379,6 +400,9 @@
                                 title: '¡Mensaje enviado!',
                                 text: 'El mensaje ha sido enviado correctamente.',
                                 confirmButtonText: 'Ok'
+                            }).then(function () {
+                                // Recargar la página después de cerrar la alerta
+                                window.location.reload();
                             });
                             console.log('SUCCESS!', response.status, response.text);
                         }, function (error) {
@@ -391,6 +415,7 @@
                             console.log('FAILED...', error);
                         });
                 });
+
 
             </script>
 
